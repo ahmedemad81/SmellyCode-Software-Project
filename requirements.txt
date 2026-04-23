@@ -1,0 +1,21 @@
+# Core
+torch
+transformers>=4.51.0
+datasets
+accelerate
+
+# Fine-tuning
+peft
+trl
+bitsandbytes
+
+# Data processing
+pandas
+scikit-learn
+
+# HTTP (for fetching code from GitHub)
+requests
+
+# Utilities
+tqdm
+# pip install --upgrade transformers accelerate
