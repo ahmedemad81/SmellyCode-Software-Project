@@ -15,6 +15,7 @@ from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
 from src.data.loader import load_data
 from src.models.model_loader import get_tokenizer
 from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL
+from src.prompts.builders import build_classifier_input
 
 
 TRAIN_PATH = "data/processed/mlcq/train.csv"
@@ -56,8 +57,9 @@ def predict_labels(model, tokenizer, dataset, max_length=1024):
     preds = []
 
     for example in dataset:
+        text = build_classifier_input(example["code"])
         inputs = tokenizer(
-            example["code"],
+            text,
             return_tensors="pt",
             truncation=True,
             max_length=max_length,
