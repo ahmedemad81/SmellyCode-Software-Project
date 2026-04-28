@@ -81,11 +81,11 @@ results/mlcq_multiclass/
 
 ## 📊 Results
 
-| Model                         | Accuracy | F1 (Macro) | Precision (Macro) | Recall (Macro) |
-| ----------------------------- | -------- | ---------- | ----------------- | -------------- |
-| Qwen3-0.6B                    | 0.461    | 0.451      | 0.460             | 0.460          |
-| Qwen3-0.6B (No Context given) | 0.499    | 0.427      | 0.505             | 0.498          |
-
+| Model                         | F1 (Macro) | Precision (Macro) | Recall (Macro) | Accuracy |
+| ----------------------------- | ---------- | ----------------- | -------------- | -------- |
+| Qwen3-0.6B (Long Context)     | 0.451      | 0.460             | 0.461          | 0.460    |
+| Qwen3-0.6B (Short Context)    | 0.364      | 0.444             | 0.491          | 0.492    |
+| Qwen3-0.6B (No Context given) | 0.427      | 0.505            | 0.498           | 0.499    |
 
 ## 📊 Notes
 
