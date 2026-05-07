@@ -99,7 +99,7 @@ def main():
         gradient_checkpointing=True,
     )
 
-    triner = Trainer(
+    trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=train_dataset,
