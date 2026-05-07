@@ -86,8 +86,8 @@ results/mlcq_multiclass/
 | Qwen3-0.6B (Long Context)     | 0.451      | 0.460             | 0.461          | 0.460    |
 | Qwen3-0.6B (Short Context)    | 0.364      | 0.444             | 0.491          | 0.492    |
 | Qwen3-0.6B (No Context given) | 0.427      | 0.505             | 0.498          | 0.499    |
-| CodeBERTa-small-v1 (Long context) | 0.409      | 0.444             | 0.4669         | 0.4661   |
-| codegemma-2b                  | 0.140      | 0.138             | 0.223          | 0.219    |
+| CodeBERTa-small-v1 (long context) | 0.409      | 0.444             | 0.4669         | 0.4661   |
+| codegemma-2b (long context)   | 0.140      | 0.138             | 0.223          | 0.219    |
 
 
 ## 📊 Notes
