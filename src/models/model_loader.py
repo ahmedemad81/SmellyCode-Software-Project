@@ -55,19 +55,14 @@ def get_model(model_name: str, use_4bit: bool = True):
     model = prepare_model_for_kbit_training(model)
 
     peft_config = LoraConfig(
-        r=16,
-        lora_alpha=32,
+        r=8,
+        lora_alpha=16,
         lora_dropout=0.05,
         bias="none",
         task_type="SEQ_CLS",
         target_modules=[
             "q_proj",
-            "k_proj",
             "v_proj",
-            "o_proj",
-            "gate_proj",
-            "up_proj",
-            "down_proj",
         ],
     )
 
