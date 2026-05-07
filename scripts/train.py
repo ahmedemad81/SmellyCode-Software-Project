@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 from src.data.loader import load_data
 from src.models.model_loader import get_model, get_tokenizer
-from src.constants import LABEL_TO_ID
+from src.constants import LABEL_TO_ID, MAX_LENGTH
 from src.prompts.builders import build_classifier_input
 
 
@@ -23,7 +23,7 @@ MODEL_NAME = "Qwen/Qwen3-0.6B"
 OUTPUT_DIR = "outputs/qwen3_0_6b_seqcls"
 
 
-def tokenize_dataset(dataset, tokenizer, max_length=512):
+def tokenize_dataset(dataset, tokenizer, max_length=MAX_LENGTH):
     def _tokenize(example):
         text = build_classifier_input(example["code"])
 

@@ -1,7 +1,8 @@
 import torch
 
 from src.models.model_loader import get_model, get_tokenizer
-from src.constants import ID_TO_LABEL
+from src.constants import ID_TO_LABEL, MAX_LENGTH
+from src.prompts.builders import build_classifier_input
 
 MODEL_NAME = "Qwen/Qwen3-0.6B"
 
@@ -35,11 +36,12 @@ public class Customer {
 """
 
     print("\nTokenizing...")
+    text = build_classifier_input(sample_code)
     inputs = tokenizer(
-        sample_code,
+        text,
         return_tensors="pt",
         truncation=True,
-        max_length=1024,
+        max_length=MAX_LENGTH,
         padding=True,
     ).to(model.device)
 

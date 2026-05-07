@@ -14,7 +14,7 @@ from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
 
 from src.data.loader import load_data
 from src.models.model_loader import get_tokenizer
-from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL
+from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL, MAX_LENGTH
 from src.prompts.builders import build_classifier_input
 
 
@@ -53,7 +53,7 @@ def load_finetuned_model(base_model_name: str, adapter_dir: str):
 
 
 @torch.inference_mode()
-def predict_labels(model, tokenizer, dataset, max_length=1024):
+def predict_labels(model, tokenizer, dataset, max_length=MAX_LENGTH):
     preds = []
 
     for example in dataset:

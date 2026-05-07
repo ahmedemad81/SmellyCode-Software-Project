@@ -3,7 +3,8 @@ from peft import PeftModel
 from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
 
 from src.models.model_loader import get_tokenizer
-from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL
+from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL, MAX_LENGTH
+from src.prompts.builders import build_classifier_input
 
 
 BASE_MODEL_NAME = "Qwen/Qwen3-0.6B"
@@ -35,9 +36,10 @@ def load_finetuned_model(base_model_name: str, adapter_dir: str):
 
 
 @torch.inference_mode()
-def predict_code_smell(model, tokenizer, code: str, max_length: int = 1024) -> str:
+def predict_code_smell(model, tokenizer, code: str, max_length: int = MAX_LENGTH) -> str:
+    text = build_classifier_input(code)
     inputs = tokenizer(
-        code,
+        text,
         return_tensors="pt",
         truncation=True,
         max_length=max_length,
