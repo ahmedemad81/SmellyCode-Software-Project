@@ -4,12 +4,7 @@ import requests
 import pandas as pd
 from typing import Optional
 
-from src.constants import LABEL_MAP, LABELS
-
-RAW_METADATA_PATH = "data/raw/mlcq/mlcq.csv"
-OUTPUT_PATH = "data/interim/mlcq/mlcq_with_code.csv"
-REQUEST_TIMEOUT = 20
-SLEEP_BETWEEN_REQUESTS = 0.2
+from src.constants import LABEL_MAP, LABELS, RAW_METADATA_PATH, INTERIM_DATA_PATH, REQUEST_TIMEOUT, SLEEP_BETWEEN_REQUESTS
 
 def normalize_label(label: str) -> str:
     label = str(label).strip().lower()
@@ -68,7 +63,7 @@ def main():
             f"File not found: {RAW_METADATA_PATH}"
         )
 
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    os.makedirs(os.path.dirname(INTERIM_DATA_PATH), exist_ok=True)
 
     df = pd.read_csv(RAW_METADATA_PATH, sep=";")
 
@@ -146,10 +141,10 @@ def main():
     # Keep only the target labels
     out_df = out_df[out_df["label"].isin(LABELS)].copy()
 
-    out_df.to_csv(OUTPUT_PATH, index=False)
+    out_df.to_csv(INTERIM_DATA_PATH, index=False)
 
     print("\nDone.")
-    print(f"Saved file: {OUTPUT_PATH}")
+    print(f"Saved file: {INTERIM_DATA_PATH}")
     print(f"Successful samples: {success_count}")
     print(f"Failed samples: {fail_count}")
 

@@ -11,16 +11,8 @@ from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 from src.data.loader import load_data
 from src.models.model_loader import get_model, get_tokenizer
-from src.constants import LABEL_TO_ID, MAX_LENGTH
+from src.constants import LABEL_TO_ID, MAX_LENGTH, TRAIN_PATH, VALID_PATH, TEST_PATH, MODEL_NAME, MODEL_OUTPUT_DIR
 from src.prompts.builders import build_classifier_input
-
-
-TRAIN_PATH = "data/processed/mlcq/train.csv"
-VALID_PATH = "data/processed/mlcq/valid.csv"
-TEST_PATH = "data/processed/mlcq/test.csv"
-
-MODEL_NAME = "Qwen/Qwen3-0.6B"
-OUTPUT_DIR = "outputs/qwen3_0_6b_seqcls"
 
 
 def tokenize_dataset(dataset, tokenizer, max_length=MAX_LENGTH):
@@ -63,7 +55,7 @@ def compute_metrics(eval_pred):
 
 
 def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(MODEL_OUTPUT_DIR, exist_ok=True)
 
     print("Loading tokenizer...")
     tokenizer = get_tokenizer(MODEL_NAME)
@@ -81,7 +73,7 @@ def main():
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
     training_args = TrainingArguments(
-        output_dir=OUTPUT_DIR,
+        output_dir=MODEL_OUTPUT_DIR,
         num_train_epochs=3,
         per_device_train_batch_size=2,
         per_device_eval_batch_size=2,
@@ -120,8 +112,8 @@ def main():
     trainer.train()
 
     print("Saving best model...")
-    trainer.save_model(OUTPUT_DIR)
-    tokenizer.save_pretrained(OUTPUT_DIR)
+    trainer.save_model(MODEL_OUTPUT_DIR)
+    tokenizer.save_pretrained(MODEL_OUTPUT_DIR)
 
     print("Training complete.")
 

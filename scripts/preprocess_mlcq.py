@@ -2,13 +2,7 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from src.constants import LABELS, LABEL_MAP
-
-RAW_PATH = "data/interim/mlcq/mlcq_with_code.csv"
-OUTPUT_DIR = "data/processed/mlcq"
-TRAIN_PATH = os.path.join(OUTPUT_DIR, "train.csv")
-VALID_PATH = os.path.join(OUTPUT_DIR, "valid.csv")
-TEST_PATH = os.path.join(OUTPUT_DIR, "test.csv")
+from src.constants import LABELS, LABEL_MAP, INTERIM_DATA_PATH, PROCESSED_DIR, TRAIN_PATH, VALID_PATH, TEST_PATH
 
 def normalize_label(label: str) -> str:
     label = str(label).strip().lower()
@@ -69,13 +63,13 @@ def clean_dataset(df: pd.DataFrame) -> pd.DataFrame:
 def main():
     print("Loading fetched dataset...")
 
-    if not os.path.exists(RAW_PATH):
+    if not os.path.exists(INTERIM_DATA_PATH):
         raise FileNotFoundError(
-            f"File not found: {RAW_PATH}\n"
+            f"File not found: {INTERIM_DATA_PATH}\n"
             "Run `python scripts/fetch_mlcq_code.py` first."
         )
 
-    df = pd.read_csv(RAW_PATH)
+    df = pd.read_csv(INTERIM_DATA_PATH)
 
     print("Columns found:", list(df.columns))
 
@@ -103,7 +97,7 @@ def main():
         stratify=temp_df["label"],
     )
 
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(PROCESSED_DIR, exist_ok=True)
 
     train_df[["code", "label"]].to_csv(TRAIN_PATH, index=False)
     valid_df[["code", "label"]].to_csv(VALID_PATH, index=False)

@@ -1,10 +1,8 @@
 import torch
 
 from src.models.model_loader import get_model, get_tokenizer
-from src.constants import ID_TO_LABEL, MAX_LENGTH
+from src.constants import ID_TO_LABEL, MAX_LENGTH, MODEL_NAME
 from src.prompts.builders import build_classifier_input
-
-MODEL_NAME = "Qwen/Qwen3-0.6B"
 
 def main():
     print("CUDA available:", torch.cuda.is_available())

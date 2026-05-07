@@ -14,18 +14,9 @@ from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
 
 from src.data.loader import load_data
 from src.models.model_loader import get_tokenizer
-from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL, MAX_LENGTH
+from src.constants import LABELS, LABEL_TO_ID, ID_TO_LABEL, MAX_LENGTH, TRAIN_PATH, VALID_PATH, TEST_PATH, MODEL_NAME, MODEL_OUTPUT_DIR, RESULTS_DIR, RESULTS_PATH
 from src.prompts.builders import build_classifier_input
 
-
-TRAIN_PATH = "data/processed/mlcq/train.csv"
-VALID_PATH = "data/processed/mlcq/valid.csv"
-TEST_PATH = "data/processed/mlcq/test.csv"
-
-BASE_MODEL_NAME = "Qwen/Qwen3-0.6B"
-MODEL_DIR = "outputs/qwen3_0_6b_seqcls"
-RESULTS_DIR = "results/mlcq_multiclass"
-RESULTS_PATH = os.path.join(RESULTS_DIR, "qwen3_0_6b_seqcls_metrics.json")
 
 
 def load_finetuned_model(base_model_name: str, adapter_dir: str):
@@ -114,14 +105,14 @@ def main():
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
     print("Loading tokenizer...")
-    tokenizer = get_tokenizer(BASE_MODEL_NAME)
+    tokenizer = get_tokenizer(MODEL_NAME)
 
     print("Loading dataset...")
     dataset = load_data(TRAIN_PATH, VALID_PATH, TEST_PATH)
     test_dataset = dataset["test"]
 
     print("Loading fine-tuned model...")
-    model = load_finetuned_model(BASE_MODEL_NAME, MODEL_DIR)
+    model = load_finetuned_model(MODEL_NAME, MODEL_OUTPUT_DIR)
 
     print("Running inference on test set...")
     preds = predict_labels(model, tokenizer, test_dataset)
