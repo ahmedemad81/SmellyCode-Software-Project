@@ -89,6 +89,12 @@ results/mlcq_multiclass/
 | CodeBERTa-small-v1 (long context) | 0.409      | 0.444             | 0.4669         | 0.4661   |
 | codegemma-2b (long context)   | 0.140      | 0.138             | 0.223          | 0.219    |
 | DeepSeek-R1-Distill-Qwen-1.5B (Long Context) | 0.465 | 0.4718  | 0.474          | 0.474    |
+| Smollm2 (v1) | 0.1406 | 0.10845 |  0.2478 |  0.2434 |
+| Smollm2 (v2 -after edits) | 0.4666 | 0.47705 |  0.4804 |  0.48106 |
+| llama3.2:1b (v1) | 0.3908 | 0.4096 | 0.4846 | 0.48335 | 
+| llama3.2:1b (v2 -after edits) | 0.3671 |  0.3611 |  0.45773 | 0.45695 |
+
+
 
 
 ## 📊 Notes
